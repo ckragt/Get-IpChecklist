@@ -26,4 +26,4 @@ Import in a script (current session): <code>Import-Module \path\to\Get-IpCheckli
 Import to all sessions: Open <code>C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1</code> or create it as administrator. Add <code>Import-Module \path\to\Get-IpChecklist.ps1;</code> and save profile.ps1 and you are ready to go.
 
 ### CONTACT
-Feel free to contact me via e-mail: ck [at] kragt.pro 
+Feel free to contact me via e-mail: code [at] kragt.pro 
