@@ -4,31 +4,31 @@ Function Global:Get-IpChecklist
     (
         [Parameter(Position=0 , Mandatory = $true, ValueFromPipeline = $true)]
         $CheckType,
- 
+
         [Parameter(Position=1 , Mandatory = $true, ValueFromPipeline = $true)]
         $CheckValue,
- 
+
         [Parameter(Position=2 , Mandatory = $false, ValueFromPipeline = $true)]
         $ConvertTime,
- 
+
         [Parameter(Position=3 , Mandatory = $false, ValueFromPipeline = $true)]
         $ConsoleMode
     )
- 
+
     Process
     {
         If ($CheckType -eq "ip")
         {
             $ApiValueString1 = "?"+$CheckType+"="+$CheckValue+"&usernames=1&emails=1";
         }
- 
-        Else 
+
+        Else
         {
             $ApiValueString1 = "?"+$CheckType+"="+$CheckValue;
         }
- 
-        $IpChecklistJson = Invoke-WebRequest -Uri http://api.ip-checklist.com/$ApiValueString1 | ConvertFrom-Json;
- 
+
+        $IpChecklistJson = Invoke-WebRequest -Uri http://api.ip-checklist.kragt.pro/$ApiValueString1 | ConvertFrom-Json;
+
         If ($CheckType -eq "ip")
         {
             $Global:IpChecklistOutput_Errors        = $IpChecklistJson.errors;
@@ -47,7 +47,7 @@ Function Global:Get-IpChecklist
 
             $IpChecklistSearchTypeString = $IpChecklistOutput_Ip;
         }
- 
+
         ElseIf ($CheckType -eq "username")
         {
             $Global:IpChecklistOutput_Errors        = $IpChecklistJson.username.errors;
@@ -63,7 +63,7 @@ Function Global:Get-IpChecklist
 
             $IpChecklistSearchTypeString = $IpChecklistOutput_Username;
         }
- 
+
         ElseIf ($CheckType -eq "email")
         {
             $Global:IpChecklistOutput_Errors        = $IpChecklistJson.email.errors;
@@ -79,17 +79,17 @@ Function Global:Get-IpChecklist
 
             $IpChecklistSearchTypeString = $IpChecklistOutput_Email;
         }
- 
+
         If ($ConvertTime -eq "true")
         {
             $IpChecklistUnixEpochStart = New-Object -Type DateTime -ArgumentList 1970, 1, 1, 0, 0, 0, 0;
             $IpChecklistUnixEpochNow = $IpChecklistUnixEpochStart.AddSeconds($IpChecklistJson.last_update);
- 
+
             $Global:IpChecklistOutput_LastUpdate = $IpChecklistUnixEpochNow;
         }
- 
+
         $IpChecklistResult = $IpChecklistSearchTypeString -match $CheckValue;
- 
-        If ($ConsoleMode -eq "silent") {  } Else { Write-Host $IpChecklistResult; }    
+
+        If ($ConsoleMode -eq "silent") {  } Else { Write-Host $IpChecklistResult; }
     }
 }
