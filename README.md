@@ -1,5 +1,8 @@
+# ⚠ The Project behind this is abandoned! ⚠
+Currently this script will not work because thr IP-Checklist project has been abandoned by it's owner. I have changed the link in the script for security and demo reasons.
+
 # Get-IpChecklist
-> PowerShell Script to test data against spam.
+PowerShell Script to test data against spam.
 
 ### DESCRIPTION
 After you have imported this module, you can call it via <code>Get-IpChecklist</code> but without parameter this module would not work.
